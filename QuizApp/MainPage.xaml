@@ -11,6 +11,18 @@
         <Label Text="Welcome to Xamarin.Forms!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
+        <StackLayout>
+            <Button Text="Add" Clicked="OnAdd"></Button>
+            <Button Text="Delete" Clicked="OnDelete"></Button>
+        </StackLayout>
+        <ListView x:Name="Students_List">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding qa_users_name}" Detail="{Binding qa_users_email}">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 
 </ContentPage>
