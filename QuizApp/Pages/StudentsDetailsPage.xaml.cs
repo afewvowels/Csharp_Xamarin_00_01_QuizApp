@@ -20,7 +20,9 @@ namespace QuizApp.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            ListView.ItemsSource = await QuizApp.
+            var _students = new RestManagers.RestClientStudent();
+
+            ListView.ItemsSource = await _students.RefreshDataAsync();
         }
 
         async void OnAddStudentClicked(object sender, EventArgs e)
