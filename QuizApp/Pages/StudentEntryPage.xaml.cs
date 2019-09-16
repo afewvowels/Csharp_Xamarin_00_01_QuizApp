@@ -8,6 +8,8 @@ using QuizApp.Models;
 using QuizApp.RestManagers;
 
 using Xamarin.Forms;
+using System.Diagnostics;
+using System.Text;
 
 namespace QuizApp.Pages
 {
@@ -26,10 +28,11 @@ namespace QuizApp.Pages
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            var _newStudent = (Student)BindingContext;
+            var _newStudent = new Student;
+            _newStudent = (Student)BindingContext;
             var _restClient = new RestClientStudent();
             await _restClient.SaveStudentInfoAsync(_newStudent, true);
-            await Navigation.PopAsync();
+            Debug.WriteLine(_newStudent.qa_users_name);
         }
 
         async void OnDeleteButtonClicked(object sender, EventArgs e)

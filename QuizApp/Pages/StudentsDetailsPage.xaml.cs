@@ -22,11 +22,12 @@ namespace QuizApp.Pages
             base.OnAppearing();
             var _students = new RestManagers.RestClientStudent();
 
-            ListView.ItemsSource = await _students.RefreshDataAsync();
+            StudentsDetailsList.ItemsSource = await _students.RefreshDataAsync();
         }
 
         async void OnAddStudentClicked(object sender, EventArgs e)
         {
+          await Navigation.PushAsync(new StudentEntryPage());
         }
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)

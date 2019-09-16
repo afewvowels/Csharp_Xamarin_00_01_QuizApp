@@ -5,17 +5,17 @@
     x:Class="QuizApp.Pages.StudentEntryPage">
    <StackLayout>
        <Entry Placeholder="Enter your name"
-              Text="{Binding qa_users_name}"
-              HeightRequest="100" />
+              Text="{Binding Path=qa_users_name}"
+              HeightRequest="50" />
        <Entry Placeholder="Enter your password"
-              Text="{Binding qa_users_pass}"
-              HeightRequest="100" />
+              Text="{Binding Path=qa_users_pass}"
+              HeightRequest="50" />
        <Entry Placeholder="Enter your email"
-              Text="{Binding qa_users_email}"
-              HeightRequest="100" />
+              Text="{Binding Path=qa_users_email}"
+              HeightRequest="50" />
        <Entry Placeholder="Enter your score"
-              Text="{Binding qa_users_score}"
-              HeightRequest="100" />
+              Text="{Binding Path=qa_users_score}"
+              HeightRequest="50" />
        <Grid>
            <Grid.ColumnDefinitions>
                <ColumnDefinition Width="*" />
