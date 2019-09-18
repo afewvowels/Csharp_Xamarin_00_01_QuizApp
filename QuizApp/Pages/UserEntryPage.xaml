@@ -1,31 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="QuizApp.Pages.StudentEntryPage">
-   <StackLayout>
-       <Entry Placeholder="Enter your name"
-              x:Name="Name"
-              HeightRequest="100" />
-       <Entry Placeholder="Enter your password"
-              x:Name="Password"
-              HeightRequest="100" />
-       <Entry Placeholder="Enter your email"
-              x:Name="Email"
-              HeightRequest="100" />
-       <Entry Placeholder="Enter your score"
-              x:Name="Score"
-              HeightRequest="100" />
-       <Grid>
-           <Grid.ColumnDefinitions>
-               <ColumnDefinition Width="*" />
-               <ColumnDefinition Width="*" />
-           </Grid.ColumnDefinitions>
-           <Button Text="Save"
-                   Clicked="OnSaveButtonClicked" />
-           <Button Grid.Column="1"
-                   Text="Delete"
-                   Clicked="OnDeleteButtonClicked" />
-       </Grid>
-   </StackLayout>
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="QuizApp.Pages.UserEntryPage">
+	<StackLayout>
+		<Picker Title="Select Student"
+						HorizontalOptions="Center"
+						x:Name="UserPicker" />
+		<Entry Placeholder="Enter your name"
+						x:Name="Name" />
+		<Entry Placeholder="Enter your login name"
+						x:Name="Login" />
+		<Entry Placeholder="Enter your password"
+						x:Name="Password" />
+		<Entry Placeholder="Enter your email"
+						x:Name="Email" />
+		<Entry Placeholder="Enter your score"
+						x:Name="Score" />
+		<Entry Placeholder="Enter num. of correct answers"
+						x:Name="AnswersCorrect" />
+		<Entry Placeholder="Enter num. of incorrect answers"
+						x:Name="AnswersIncorrect" />
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Label Text="Admin:" />
+			<CheckBox x:Name="isAdmin"
+								Grid.Column="1" />
+		</Grid>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Button Text="Save"
+							Clicked="OnSaveButtonClicked" />
+			<Button Grid.Column="1"
+							Text="Delete"
+							Clicked="OnDeleteButtonClicked" />
+		</Grid>
+	</StackLayout>
 </ContentPage>
