@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="QuizApp.Pages.LoginPage">
+    <StackLayout>
+        <Entry Placeholder="User Name"
+               x:Name="UserName" />
+        <Entry Placeholder="User Password"
+               x:Name="UserPassword" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Save"
+                    Clicked="OnSaveButtonClicked" />
+            <Button Text="Back"
+                    Clicked="OnBackButtonClicked" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

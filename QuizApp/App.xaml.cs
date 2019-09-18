@@ -7,12 +7,13 @@ namespace QuizApp
 {
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
-            MainPage = new MainPage();
-            
-            //MainPage = new NavigationPage(new StudentsDetailsPage());
+            //MainPage = new MainPage();
+
+            MainPage = new NavigationPage(new StudentsDetailsPage());
         }
 
         protected override void OnStart()

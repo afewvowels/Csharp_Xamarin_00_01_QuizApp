@@ -11,10 +11,9 @@ using Xamarin.Forms;
 
 namespace QuizApp.Pages
 {
-    public partial class StudentEntryPage : ContentPage
+    public partial class UserEntryPage : ContentPage
     {
-
-        public StudentEntryPage()
+        public UserEntryPage()
         {
             InitializeComponent();
         }
@@ -26,12 +25,20 @@ namespace QuizApp.Pages
 
         async void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            var _newStudent = (Student)BindingContext;
-            var _restClient = new RestClientStudent();
-            await _restClient.SaveStudentInfoAsync(_newStudent, true);
+            var _newUser = new User();
+
+            _newUser.qa_users_name = Name.Text;
+            _newUser.qa_users_pass = Password.Text;
+            _newUser.qa_users_email = Email.Text;
+            _newUser.qa_users_score = Convert.ToInt32(Score.Text);
+
+            var _restClient = new RestClientUser();
+
+            await _restClient.SaveUserInfoAsync(_newUser, true);
+
             await Navigation.PopAsync();
         }
-
+        
         async void OnDeleteButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
@@ -9,29 +10,31 @@ using QuizApp.Models;
 
 namespace QuizApp.RestManagers
 {
-    public class RestClientStudent : IRestServiceStudent
+    public class RestClientUser : IRestServiceUser
     {
         HttpClient _client;
 
-        public List<Student> Students { get; set; }
+        public List<User> Users { get; set; }
 
-        public RestClientStudent()
+        public RestClientUser()
         {
             _client = new HttpClient();
         }
 
-        public async Task<List<Student>> RefreshDataAsync()
+        public async Task<ObservableCollection<User>> RefreshDataAsync()
         {
-            Students = new List<Student>();
+            Users = new List<User>();
+            ObservableCollection<User> UsersData = new ObservableCollection<User>(Users);
 
-            var uri = new Uri(string.Format(Constants.StudentAddress, string.Empty));
+            var uri = new Uri(string.Format(Constants.UserAddress, string.Empty));
             try
             {
                 var response = await _client.GetAsync(uri);
                 if(response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Students = JsonConvert.DeserializeObject<List<Student>>(content);
+                    Users = JsonConvert.DeserializeObject<List<User>>(content);
+                    UsersData = new ObservableCollection<User>(Users);
                 }
             }
             catch (Exception ex)
@@ -39,31 +42,36 @@ namespace QuizApp.RestManagers
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Students;
+            return UsersData;
         }
 
-        public async Task SaveStudentInfoAsync(Student student, bool isNewItem = false)
+        public async Task SaveUserInfoAsync(User user, bool isNewItem = false)
         {
-            var uri = new Uri(string.Format(Constants.StudentAddress, string.Empty));
+            var uri = new Uri(string.Format(Constants.UserAddress, string.Empty));
 
             try
             {
-                var json = JsonConvert.SerializeObject(student);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json = JsonConvert.SerializeObject(User);
 
                 HttpResponseMessage response = null;
                 if (isNewItem)
                 {
+                    //var temp = (Newtonsoft.Json.Linq.JObject)JsonConvert.DeserializeObject(json);
+                    //temp.Property("qa_user_pk").Remove();
+                    //json = JsonConvert.SerializeObject(temp);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    //response = await _client.PostAsync(uri, content);
                     response = await _client.PostAsync(uri, content);
                 }
                 else
                 {
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
                     response = await _client.PutAsync(uri, content);
                 }
 
                 if(response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tStudent successfully saved");
+                    Debug.WriteLine(@"\tUser successfully saved");
                 }
             }
             catch (Exception ex)
@@ -72,9 +80,9 @@ namespace QuizApp.RestManagers
             }
         }
 
-        public async Task DeleteStudentInfoAsync(int pk)
+        public async Task DeleteUserInfoAsync(int pk)
         {
-            var uri = new Uri(string.Format(Constants.StudentAddress, string.Empty));
+            var uri = new Uri(string.Format(Constants.UserAddress, string.Empty));
 
             try
             {
@@ -82,7 +90,7 @@ namespace QuizApp.RestManagers
 
                 if(response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tStudent successfully deleted");
+                    Debug.WriteLine(@"\tUser successfully deleted");
                 }
             }
             catch (Exception ex)
@@ -91,7 +99,7 @@ namespace QuizApp.RestManagers
             }
         }
 
-        Task<List<Student>> IRestServiceStudent.RefreshDataAsync()
+        Task<List<User>> IRestServiceUser.RefreshDataAsync()
         {
             throw new NotImplementedException();
         }

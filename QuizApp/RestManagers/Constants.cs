@@ -3,8 +3,7 @@ namespace QuizApp.RestManagers
 {
     public static class Constants
     {
-        public static string BaseAddress = "https://keithbsmith.me/tests/mobile/api";
-        public static string StudentAddress = BaseAddress + "/api/student/{0}";
-
+        public static string BaseAddress = "https://keithbsmith.me/ysu/quizapp/api";
+        public static string UserAddress = BaseAddress + "/users/{0}";
     }
 }
