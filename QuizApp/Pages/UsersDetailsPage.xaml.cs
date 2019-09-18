@@ -9,10 +9,10 @@ using Xamarin.Forms;
 
 namespace QuizApp.Pages
 {
-    public partial class StudentsDetailsPage : ContentPage
+    public partial class UsersDetailsPage : ContentPage
     {
 
-        public StudentsDetailsPage()
+        public UsersDetailsPage()
         {
             InitializeComponent();
         }
@@ -20,14 +20,15 @@ namespace QuizApp.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            var _students = new RestManagers.RestClientStudent();
 
-            StudentsDetailsList.ItemsSource = await _students.RefreshDataAsync();
+            var _users = new RestManagers.RestClientUser();
+
+            UsersDetailsList.ItemsSource = await _users.RefreshDataAsync();
         }
 
         async void OnAddStudentClicked(object sender, EventArgs e)
         {
-          await Navigation.PushAsync(new StudentEntryPage());
+            await Navigation.PushAsync(new UserEntryPage());
         }
 
         async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
