@@ -1,45 +1,175 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+Global style
+
+primary-color: #00796b;
+primary-light: #48a999;
+primary-dark: #004c40;
+secondary-color: #f4511e;
+secondary-light: #ff844c;
+secondary-dark: #b91400;
+font-light: #ffffff;
+font-dark: #000000;
+
+-->
+
 <ContentPage
 xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="QuizApp.Pages.UserEntryPage">
-	<StackLayout>
-		<Picker Title="Select Student"
-						HorizontalOptions="Center"
-						x:Name="UserPicker" />
-		<Entry Placeholder="Enter your name"
-						x:Name="Name" />
-		<Entry Placeholder="Enter your login name"
-						x:Name="Login" />
-		<Entry Placeholder="Enter your password"
-						x:Name="Password" />
-		<Entry Placeholder="Enter your email"
-						x:Name="Email" />
-		<Entry Placeholder="Enter your score"
-						x:Name="Score" />
-		<Entry Placeholder="Enter num. of correct answers"
-						x:Name="AnswersCorrect" />
-		<Entry Placeholder="Enter num. of incorrect answers"
-						x:Name="AnswersIncorrect" />
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<Label Text="Admin:" />
-			<CheckBox x:Name="isAdmin"
-								Grid.Column="1" />
-		</Grid>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<Button Text="Save"
-							Clicked="OnSaveButtonClicked" />
-			<Button Grid.Column="1"
-							Text="Delete"
-							Clicked="OnDeleteButtonClicked" />
-		</Grid>
-	</StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="StylePicker" TargetType="Picker">
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor"
+                        Value="#00796b" />
+                <Setter Property="TextColor"
+                        Value="white" />
+                <Setter Property="BackgroundColor"
+                        Value="#00796b" />
+                <Setter Property="WidthRequest"
+                        Value="1000" />
+                <Setter Property="TitleColor"
+                        Value="white" />
+            </Style>
+            <Style x:Key="StyleLabel" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="white" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+            </Style>
+            <Style x:Key="StyleEntry" TargetType="Entry">
+                <Setter Property="BackgroundColor"
+                        Value="#00796b" />
+                <Setter Property="PlaceholderColor"
+                        Value="white" />
+                <Setter Property="TextColor"
+                        Value="white" />
+            </Style>
+            <Style x:Key="StyleFrame" TargetType="Frame">
+                <Setter Property="OutlineColor"
+                        Value="#adadad" />
+                <Setter Property="CornerRadius"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="1,1,1,1" />
+                <Setter Property="HasShadow"
+                        Value="False" />
+            </Style>
+            <Style x:Key="StyleButton" TargetType="Button">
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="BackgroundColor"
+                        Value="#00796b" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Padding="15"
+                BackgroundColor="#00796b">
+	    <StackLayout>
+		    <Picker Title="Select User"
+				    x:Name="UserPicker"
+                    SelectedIndexChanged="OnUserSelectedIndexChanged"
+                    Style="{StaticResource StylePicker}" />
+		    <Picker Title="Select Class"
+				    x:Name="ClassPicker"
+                    SelectedIndexChanged="OnClassSelectedIndexChanged"
+                    Style="{StaticResource StylePicker}" />
+            <Label Text="Primary Key"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+                <Entry Placeholder="Primary Key"
+                        x:Name="PrimaryKey"
+                       Style="{StaticResource StyleEntry}"/>
+            </Frame>
+            <Label Text="Class Key"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}" >
+                <Entry Placeholder="Class Key"
+                   x:Name="ClassKey"
+                       Style="{StaticResource StyleEntry}"/>
+            </Frame>
+            <Label Text="Name"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter your name"
+			        x:Name="Name"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Login"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter your login name"
+				    x:Name="Login"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Password"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter your password"
+				    x:Name="Password"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Email"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter your email"
+				    x:Name="Email"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Total Score"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter your score"
+				    x:Name="Score"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Answers Correct"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter num. of correct answers"
+				    x:Name="AnswersCorrect"
+                       Style="{StaticResource StyleEntry}"/>
+            </Frame>
+            <Label Text="Answers Incorrect"
+                   Style="{StaticResource StyleLabel}" />
+            <Frame Style="{StaticResource StyleFrame}">
+		        <Entry Placeholder="Enter num. of incorrect answers"
+				    x:Name="AnswersIncorrect"
+                       Style="{StaticResource StyleEntry}" />
+            </Frame>
+            <Label Text="Is Admin"
+                   Style="{StaticResource StyleLabel}" />
+            <Grid>
+			    <Grid.ColumnDefinitions>
+				    <ColumnDefinition Width="*" />
+				    <ColumnDefinition Width="*" />
+			    </Grid.ColumnDefinitions>
+			    <Label Text="Admin:"
+                       Style="{StaticResource StyleLabel}"/>
+			    <CheckBox x:Name="isAdmin"
+					        Grid.Column="1" />
+		    </Grid>
+		    <Grid>
+			    <Grid.ColumnDefinitions>
+				    <ColumnDefinition Width="*" />
+				    <ColumnDefinition Width="*" />
+			    </Grid.ColumnDefinitions>
+                <Frame Style="{StaticResource StyleFrame}">
+			        <Button Text="Save"
+					    Clicked="OnSaveButtonClicked"
+                        Style="{StaticResource StyleButton}"/>
+                </Frame>
+                <Frame Grid.Column="1"
+                    Style="{StaticResource StyleFrame}">
+			        <Button
+					    Text="Delete"
+					    Clicked="OnDeleteButtonClicked"
+                        Style="{StaticResource StyleButton}"/>
+                </Frame>
+		    </Grid>
+	    </StackLayout>
+    </ScrollView>
 </ContentPage>
